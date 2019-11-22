@@ -1,5 +1,5 @@
 <?php
-    $append = $_POST["append"];
+    $append[] = $_POST["append"];
 
     $inp = file_get_contents('contacts.json');
 	$tempArray = json_decode($inp);
