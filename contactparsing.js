@@ -168,7 +168,6 @@ function loadContactsFromServer() {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             contactsSquared = JSON.parse(this.responseText);
-            setStatus("Loaded contacts (" + contactsSquared.length + ")");
 
             variableContact = 0;
             currentContactTable()
@@ -176,7 +175,8 @@ function loadContactsFromServer() {
     };
 
     xmlhttp.open("GET", "load-contacts.php", true);
-    xmlhttp.send();   
+    xmlhttp.send();
+    check();
 }
 
 function saveContactsToServer() {
@@ -185,10 +185,35 @@ function saveContactsToServer() {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log('Response: ' + this.responseText);
-            setStatus(this.responseText)
         }
     };
     xmlhttp.open("POST", "save-contacts.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("contacts=" + JSON.stringify(contactsSquared));   
+    xmlhttp.send("contacts=" + JSON.stringify(contactsSquared));
+}
+
+function appendToServer() {
+    var fnamevariable = '{"firstName": "'+ document.getElementById("fnameID").value + '", ';
+    var lnamevariable = '"lastName": "'+ document.getElementById("lnameID").value + '", ';
+    var namevariable = '"preferredName": "'+ document.getElementById("nameID").value + '", ';
+    var emailvariable = '"email": "'+ document.getElementById("emailID").value + '", ';
+    var phonevariable = '"phoneNumber": "'+ document.getElementById("phoneID").value + '", ';
+    var cityvariable = '"city": "'+ document.getElementById("cityID").value + '", ';
+    var statevariable = '"state": "'+ document.getElementById("stateID").value + '", ';
+    var zipvariable = '"zip": "'+ document.getElementById("zipID").value + '"}';
+    var pushedVariable = fnamevariable+lnamevariable+namevariable+emailvariable+phonevariable+cityvariable+statevariable+zipvariable;
+    pushedVariable = JSON.parse(pushedVariable);
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log('Response: ' + this.responseText);
+        }
+    };
+    xmlhttp.open("POST", "append-contacts.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("append=" + JSON.stringify(pushedVariable));
+
+    console.log(pushedVariable)
+    contactMarker();
 }
