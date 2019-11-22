@@ -176,7 +176,6 @@ function loadContactsFromServer() {
 
     xmlhttp.open("GET", "load-contacts.php", true);
     xmlhttp.send();
-    check();
 }
 
 function saveContactsToServer() {
