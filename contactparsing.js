@@ -45,6 +45,7 @@ function showContact() {
 
 //Logs the contacts to the html page.
 function check() {
+    document.getElementById("contactsID").innerHTML = "";
 	for (i = 0; i < contactsSquared.length; i++) {
 		console.log(contactsSquared[i])
 		document.getElementById("contactsID").insertAdjacentHTML("beforeend","<h3>Contact: " + contactsSquared[i].preferredName + "</h3>First Name: " + contactsSquared[i].firstName + 
