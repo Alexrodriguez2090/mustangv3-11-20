@@ -212,7 +212,7 @@ function appendToServer() {
     };
     xmlhttp.open("POST", "append-contacts.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("append=" + JSON.stringify(pushedVariable));
+    xmlhttp.send("append=" + pushedVariable);
 
     console.log(pushedVariable)
     contactMarker();
