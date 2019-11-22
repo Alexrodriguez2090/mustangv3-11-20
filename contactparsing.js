@@ -37,7 +37,8 @@ function showContact() {
     ofIndexLoad.onload = function() {
     	console.log(ofIndexLoad.responseText)
     	contactOfContacts = JSON.parse(ofIndexLoad.responseText);
-    	contactsSquared.push(contactOfContacts)
+    	contactsSquared.push(contactOfContacts);
+        check();
 	}
     ofIndexLoad.send();
 }
@@ -170,7 +171,8 @@ function loadContactsFromServer() {
             contactsSquared = JSON.parse(this.responseText);
 
             variableContact = 0;
-            currentContactTable()
+            currentContactTable();
+            check();
         }
     };
 
@@ -207,6 +209,7 @@ function appendToServer() {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log('Response: ' + this.responseText);
+            loadContactsFromServer();
         }
     };
     xmlhttp.open("POST", "append-contacts.php", true);
@@ -214,5 +217,44 @@ function appendToServer() {
     xmlhttp.send("append=" + pushedVariable);
 
     console.log(pushedVariable)
-    contactMarker();
+}
+
+function deleteFromServer() {
+    currentContact = contactsSquared[variableContact];
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log('Response: ' + this.responseText);
+            loadContactsFromServer();
+        }
+    };
+    xmlhttp.open("POST", "delete-contacts.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("delete=" + variableContact);
+}
+
+function updateToServer() {
+    var fnamevariable = '{"firstName": "'+ document.getElementById("fnameID").value + '", ';
+    var lnamevariable = '"lastName": "'+ document.getElementById("lnameID").value + '", ';
+    var namevariable = '"preferredName": "'+ document.getElementById("nameID").value + '", ';
+    var emailvariable = '"email": "'+ document.getElementById("emailID").value + '", ';
+    var phonevariable = '"phoneNumber": "'+ document.getElementById("phoneID").value + '", ';
+    var cityvariable = '"city": "'+ document.getElementById("cityID").value + '", ';
+    var statevariable = '"state": "'+ document.getElementById("stateID").value + '", ';
+    var zipvariable = '"zip": "'+ document.getElementById("zipID").value + '"}';
+    var pushedVariable = fnamevariable+lnamevariable+namevariable+emailvariable+phonevariable+cityvariable+statevariable+zipvariable;
+    currentContact = contactsSquared[variableContact];
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log('Response: ' + this.responseText);
+            loadContactsFromServer();
+        }
+    };
+    xmlhttp.open("POST", "update-contacts.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("updatenum=" + variableContact + "&updatecon=" + pushedVariable);
+
 }

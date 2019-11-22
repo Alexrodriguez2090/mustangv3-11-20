@@ -3,8 +3,8 @@
 <!--
     Author:      Alejandro Rodriguez
     Class:       Web and Distributed Programming 
-    Project:     Mustang v2
-    Description: Second version of the contact logger. 
+    Project:     Mustang v3
+    Description: Third version of the contact logger. 
 -->
 <head>
 	<title>JSON Contacts</title>
@@ -16,16 +16,19 @@
 </head>
 <body onload="getIndex()">
 
-	<h1>Contact logger v2</h1>
+	<h1>Contact logger v3</h1>
 	<hr /><br />
 	<div>
-		<button onclick="nextContact()">Load contacts to memory</button>
-		<button onclick="check()">Show contacts</button> <br />
-
-		<button onclick="saveContactsToServer()">Save to Server</button>
-		<button onclick="loadContactsFromServer()">Load from Server</button>
-		<button onclick="appendToServer()">Append to Server</button>
-		<div id="numberOfContacts">Press "Load contacts to memory" to start.</div>
+		<button onclick="nextContact()">Load contacts from web</button>
+		<button onclick="loadContactsFromServer()">Load contacts from Server</button>
+		<button onclick="saveContactsToServer()">Overwrite all on memory to Server</button>
+		<!--Obsolote <button onclick="check()">Show contacts</button>-->
+		<br /><br />
+		<button onclick="appendToServer()">Append contact to Server</button>
+		<button onclick="deleteFromServer()">Delete contact from Server</button>
+		<button onclick="updateToServer()">Update contact to Server</button>
+		<br /> <br />
+		<div id="numberOfContacts">Load contacts from web or from server to start.</div>
 	</div>
 	<br /><br />
 
