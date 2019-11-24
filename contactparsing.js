@@ -68,7 +68,7 @@ function override() {
 
 function initialLoad() {
     nextContact();
-    setTimeout(saveContactsToServer(), 2000);
+    setTimeout(saveContactsToServer(), 3000);
 }
 
 function zipAutofill() {
