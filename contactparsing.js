@@ -67,6 +67,7 @@ function override() {
 }
 
 function initialLoad() {
+    contactsSquared.length = 0;
     nextContact();
     setTimeout(saveContactsToServer, 3000);
 }
@@ -209,7 +210,6 @@ function appendToServer() {
     var statevariable = '"state": "'+ document.getElementById("stateID").value + '", ';
     var zipvariable = '"zip": "'+ document.getElementById("zipID").value + '"}';
     var pushedVariable = fnamevariable+lnamevariable+namevariable+emailvariable+phonevariable+cityvariable+statevariable+zipvariable;
-    //pushedVariable = JSON.parse(pushedVariable);
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
