@@ -66,6 +66,11 @@ function override() {
 	currentContactTable()
 }
 
+function initialLoad() {
+    nextContact();
+    saveContactsToServer();
+}
+
 function zipAutofill() {
 	zipPlace = []
     var zipFind = new XMLHttpRequest();
